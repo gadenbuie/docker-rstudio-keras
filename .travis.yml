@@ -10,12 +10,12 @@ env:
   - COMMIT=${TRAVIS_COMMIT::8}
   - REPO="rstudio-keras"
 
-before_install:
+script:
   - docker build -f Dockerfile -t $DOCKER_USER/$REPO:$COMMIT .
 
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
     docker tag $DOCKER_USER/$REPO:$COMMIT $DOCKER_USER/$REPO:latest;
     docker tag $DOCKER_USER/$REPO:$COMMIT $DOCKER_USER/$REPO:travis-$TRAVIS_BUILD_NUMBER;
     docker push $DOCKER_USER/$REPO;
