@@ -8,7 +8,7 @@ status](https://travis-ci.org/gadenbuie/docker-rstudio-keras.svg?branch=master)]
 
 A Docker Image with [RStudio](https://rstudio.com) and [keras](https://keras.io/), built on [rocker/verse](https://www.rocker-project.org/).
 
-Note that currently this image is not built for use with GPUs, but this may be included in the future.
+This image is not currently built for use with GPUs, but this may be included in the future.
 
 ## Usage
 
@@ -16,7 +16,7 @@ Note that currently this image is not built for use with GPUs, but this may be i
 docker run -d -p 8787:8787 -e PASSWORD="SET A PASSWORD" grrrck/rstudio-keras
 ```
 
-Open up a `localhost:8787` in a browser and login as user `rstudio` with the password you set in the above command. Note that `rocker/verse` requires that you set a password; if not set the image will exist quickly with an error.
+Open up a `localhost:8787` in a browser and login as user `rstudio` with the password you set in the above command. The `rocker/verse` image requires that you manually set a password for RStudio; if not set the image will exit quickly and silently and you'll get an error in your browser when connecting to `localhost:8787`.
 
 If you use the default user (`rstudio`), keras and tensorflow will be pre-installed in a Python virtual environment in `~/.virtualenvs/r-tensorflow`. If you change the default user, you will need to run the following inside the RStudio interface on the image's first start.
 
